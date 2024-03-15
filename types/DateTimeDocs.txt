@@ -1,38 +1,56 @@
 Класс DateTime представляет надстройку над Date.
 Позволяет просто работать с датой. Имеет следующие методы:
 
-getDate / setDate - получение/установка текущей даты
+getDate: int / setDate - получение/установка текущей даты
 (Имеется проверка на превышение максимального числа в месяце)
 
-getDay - получение номера дня недели. Начинается с 1
+getDay: int - получение номера дня недели. Начинается с 1
 
-getMonth / setMonth - получение/установка месяца (1 - 12)
+getMonth: int / setMonth - получение/установка месяца (1 - 12)
 
-getYear / setYear - получение/установка года (>= 1970)
+getYear: int / setYear - получение/установка года (>= 1970)
 
-getHours / setHours - получение/установка часа (0 - 23)
+getHours: int / setHours - получение/установка часа (0 - 23)
 
-getMinutes / setMinutes - получение/установка минут (0 - 59)
+getMinutes: int / setMinutes - получение/установка минут (0 - 59)
 
-getSeconds / setSeconds - получение/установка секунд (0 - 59)
+getSeconds: int / setSeconds - получение/установка секунд (0 - 59)
 
-getTimestamp - получение метки timestamp в секундах
+getTimestamp: int - получение метки timestamp в секундах
 
-getLastDate - получение последнего числа в месяце
+getLastDate: int - получение последнего числа в месяце
 
-modify(intVal, strOperand) - модификация даты или времени
+modify(intVal, strOperand): void - модификация даты или времени
+
 Использование:
 let objCurrentDateTime: new DateTime();
 // 12.05.2024 14:30:35
 
-intVal - число > 0 или < 0
+intVal - > 0 и < 0
 strOperand:
-// year    - года
+// year    - год
 // month   - месяц
 // date    - число
 // hours   - час
 // minutes - минуты
 // seconds - секунды
 
-objCurrentDateTime.modify(5, "year"); // 12.05.2025 14:30:35
+objCurrentDateTime.modify(5, "year");   // 12.05.2025 14:30:35
 objCurrentDateTime.modify(-4, "month"); // 12.01.2024 14:30:35
+
+getInFormat(strFormat): string - возвращает строку, заполненную согласно формату
+d / D - число (с ведущим нулём / без нуля)
+m / M - месяц (с ведущим нулём / без нуля)
+y - полный год
+h / H - час (с ведущим нулём / без нуля)
+i / I - минуты (с ведущим нулём / без нуля)
+s / S - секунды (с ведущим нулём / без нуля)
+
+Использование
+objCurrentDateTime->getInFormat("d.m.y h:i:s"); // 12.05.2024 09:09:35
+objCurrentDateTime->getInFormat("D.M.y H:I:S"); // 12.5.2024 9:9:35
+
+objCurrentDateTime->getInFormat("h:i"); // 09:09
+objCurrentDateTime->getInFormat("H:I"); // 1:9
+
+objCurrentDateTime->getInFormat("y.m.d"); // 2024.05.12

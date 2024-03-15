@@ -56,6 +56,48 @@ export default class DateTime {
   getDay() { return this.objDateTime.intDay; }
 
   modify(intVal, strOperand) { this.objDateTime.modify(intVal, strOperand); }
+
+  getInFormat(strFormat) {
+    if (typeof strFormat !== "string") throw "strFormat must be a string";
+    if (strFormat === "") return "";
+
+    if (strFormat.indexOf("d") !== -1) {
+      let char = this.objDateTime.intDate < 10 ? "0":"";
+      char += this.objDateTime.intDate.toString();
+      strFormat = strFormat.replace("d", char);
+    }
+    strFormat = strFormat.replace("D", this.objDateTime.intDate.toString());
+    if (strFormat.indexOf("m") !== -1) {
+      let char = this.objDateTime.intMonth < 10 ? "0":"";
+      char += this.objDateTime.intMonth.toString();
+      strFormat = strFormat.replace("m", char);
+    }
+    strFormat = strFormat.replace("d", this.objDateTime.intMonth.toString());
+    strFormat = strFormat.replace("y", this.objDateTime.intYear.toString());
+
+    if (strFormat.indexOf("h") !== -1) {
+      let char = this.objDateTime.intHours < 10 ? "0":"";
+      char += this.objDateTime.intHours.toString();
+      strFormat = strFormat.replace("h", char);
+    }
+    strFormat = strFormat.replace("H", this.objDateTime.intHours.toString());
+
+    if (strFormat.indexOf("i") !== -1) {
+      let char = this.objDateTime.intMinutes < 10 ? "0":"";
+      char += this.objDateTime.intMinutes.toString();
+      strFormat = strFormat.replace("i", char);
+    }
+    strFormat = strFormat.replace("I", this.objDateTime.intMinutes.toString());
+
+    if (strFormat.indexOf("s") !== -1) {
+      let char = this.objDateTime.intSeconds < 10 ? "0":"";
+      char += this.objDateTime.intSeconds.toString();
+      strFormat = strFormat.replace("s", char);
+    }
+    strFormat = strFormat.replace("S", this.objDateTime.intSeconds.toString());
+
+    return strFormat;
+  }
 }
 
 class DateTimeBase {
@@ -68,6 +110,7 @@ class DateTimeBase {
   intLastDate  = 0
   intTimestamp= 0
   intDay      = 0;
+  intUTCMinutesOffset = 0;
 
   constructor() {
     let objDateTimeNow = new Date();
@@ -79,6 +122,13 @@ class DateTimeBase {
     this.intSeconds = objDateTimeNow.getSeconds();
     this.intTimestamp = objDateTimeNow.getTime();
     this._updateMaxDate();
+  }
+
+  setUTCHoursOffset(intVal) {
+    if (typeof intVal !== "number") throw "intVal must be a number";
+    if (intVal < 0) throw "intVal must >= 0";
+    this.intUTCMinutesOffset = intVal * 60;
+    this._updateDateTimeData();
   }
 
   _updateDateTimeData() {
