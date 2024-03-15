@@ -1,0 +1,7 @@
+ucfirst - сделать первый символ заглавным
+
+Use:
+import String from "./String.js";
+
+let strDemo = "home, Jon, Mila";
+String.ucfirst(strDemo) // "home, Jon, Mila"
