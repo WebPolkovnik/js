@@ -1,0 +1,38 @@
+Класс DateTime представляет надстройку над Date.
+Позволяет просто работать с датой. Имеет следующие методы:
+
+getDate / setDate - получение/установка текущей даты
+(Имеется проверка на превышение максимального числа в месяце)
+
+getDay - получение номера дня недели. Начинается с 1
+
+getMonth / setMonth - получение/установка месяца (1 - 12)
+
+getYear / setYear - получение/установка года (>= 1970)
+
+getHours / setHours - получение/установка часа (0 - 23)
+
+getMinutes / setMinutes - получение/установка минут (0 - 59)
+
+getSeconds / setSeconds - получение/установка секунд (0 - 59)
+
+getTimestamp - получение метки timestamp в секундах
+
+getLastDate - получение последнего числа в месяце
+
+modify(intVal, strOperand) - модификация даты или времени
+Использование:
+let objCurrentDateTime: new DateTime();
+// 12.05.2024 14:30:35
+
+intVal - число > 0 или < 0
+strOperand:
+// year    - года
+// month   - месяц
+// date    - число
+// hours   - час
+// minutes - минуты
+// seconds - секунды
+
+objCurrentDateTime.modify(5, "year"); // 12.05.2025 14:30:35
+objCurrentDateTime.modify(-4, "month"); // 12.01.2024 14:30:35

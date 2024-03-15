@@ -3,7 +3,6 @@ export default class DateTime {
 
   constructor() {}
 
-
   getDate() { return this.objDateTime.intDate; }
   setDate(intVal) {
     if (typeof intVal !== "number") throw "intVal must be a number";
@@ -86,7 +85,7 @@ class DateTimeBase {
     let objDateTime = new Date(
       this.intYear, this.intMonth, this.intDate, this.intHours, this.intMinutes, this.intSeconds
     );
-    this.intTimestamp = objDateTime.getTime();
+    this.intTimestamp = objDateTime.getTime() / 1000;
     this.intDay = objDateTime.getDay();
   }
   _updateMaxDate() { this.intLastDate = (new Date(this.intYear, this.intMonth, 0)).getDate(); }
